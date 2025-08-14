@@ -2,6 +2,7 @@ import os
 import sys
 import subprocess
 import logging
+import requests
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 
@@ -60,6 +61,9 @@ async def download_instagram(update: Update, context: ContextTypes.DEFAULT_TYPE)
         await update.message.reply_text(f"❌ Unexpected error: {e}")
 
 if __name__ == "__main__":
+    # remove any existing webhook so polling can start without conflict
+    requests.get(f"https://api.telegram.org/bot{BOT_TOKEN}/deleteWebhook")
+
     app = ApplicationBuilder().token(BOT_TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, download_instagram))
