@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg && rm -r
 WORKDIR /app
 
 # If your project files live in repo subfolder "telegram-bot-project", copy from there:
-COPY telegram-bot-project/requirements.txt /app/   # <-- adjust path if needed
+COPY telegram-bot-project/requirements.txt   # <-- adjust path if needed
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY telegram-bot-project/src/ /app/src/           # <-- adjust path if needed
