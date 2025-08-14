@@ -6,6 +6,7 @@ import requests
 import threading
 import http.server
 import socketserver
+import stat
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 
@@ -18,8 +19,24 @@ HEALTH_PORT = int(os.getenv("PORT", "8080"))
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Replace hardcoded token with environment variable
 if not BOT_TOKEN:
     raise SystemExit("Set TELEGRAM_BOT_TOKEN environment variable")
+
+# write cookies file from environment (optional -- use Render secret INSTAGRAM_COOKIES)
+COOKIES_ENV = os.getenv("INSTAGRAM_COOKIES")
+if COOKIES_ENV and not os.path.exists(COOKIES_FILE):
+    try:
+        with open(COOKIES_FILE, "w", encoding="utf-8") as f:
+            f.write(COOKIES_ENV)
+        # restrict perms
+        try:
+            os.chmod(COOKIES_FILE, stat.S_IRUSR | stat.S_IWUSR)
+        except Exception:
+            pass
+        logger.info("Wrote cookies file from INSTAGRAM_COOKIES env")
+    except Exception:
+        logger.exception("Failed to write cookies file from env")
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("📥 Send me an Instagram reel link and I’ll get you the download link.")
