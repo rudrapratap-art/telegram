@@ -14,8 +14,17 @@ Quick local
 2. Run:
    .\.venv\Scripts\python.exe src\bot.py
 
-Deploy to Render (summary)
-- Push repo to GitHub.
-- Create a Render service (Docker).
-- Set TELEGRAM_BOT_TOKEN in Render's environment settings.
-- Deploy.
+Deploy to Render (Docker)
+
+1. Ensure repo on GitHub contains Dockerfile, src/bot.py, requirements.txt.
+2. In Render dashboard -> New -> Web Service
+   - Connect GitHub repo
+   - Environment: Docker
+   - Dockerfile path: Dockerfile
+3. In Environment settings add SECRET:
+   - TELEGRAM_BOT_TOKEN = <your bot token>
+4. Deploy. Monitor logs in Render to confirm startup.
+
+Notes:
+- Do NOT commit cookies.txt or .env. Use Render secrets for tokens.
+- If some reels are private, provide cookies via secure mechanism outside the repo.

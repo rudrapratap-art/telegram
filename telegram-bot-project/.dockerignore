@@ -1,0 +1,10 @@
+# ...existing code...
+.venv
+venv
+__pycache__
+*.pyc
+*.pyo
+.env
+cookies.txt
+.git
+# ...existing code...

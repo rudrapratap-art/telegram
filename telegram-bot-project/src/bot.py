@@ -41,7 +41,7 @@ async def download_instagram(update: Update, context: ContextTypes.DEFAULT_TYPE)
         if result.returncode != 0:
             stderr = (result.stderr or "").strip()
             logger.error("yt-dlp failed: %s", stderr)
-            await update.message.reply_text(f"❌ yt-dlp error:\n{stderr or 'Unknown error'}\n\nTip: if the reel is private, add a cookies.txt file.")
+            await update.message.reply_text(f"❌ yt-dlp error:\n{stderr or 'Unknown error'}\n\nTip: if the reel is private, add a cookies.txt file (not recommended in repo).")
             return
 
         lines = [ln.strip() for ln in (result.stdout or "").splitlines() if ln.strip()]
