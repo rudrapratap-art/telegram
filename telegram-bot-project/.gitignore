@@ -1,0 +1,13 @@
+# Python / venv
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Secrets / local files
+.env
+cookies.txt
+*.sqlite3
+.idea/
+.vscode/

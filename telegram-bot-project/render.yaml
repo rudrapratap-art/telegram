@@ -1,0 +1,11 @@
+services:
+  - type: web_service
+    name: insta-yt-dlp-bot
+    env: docker
+    plan: free
+    dockerfilePath: Dockerfile
+    buildCommand: ""
+    startCommand: ""
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
