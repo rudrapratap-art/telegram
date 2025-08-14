@@ -9,7 +9,7 @@ Requirements
 Quick local
 1. Create venv, install deps:
    .\.venv\Scripts\Activate.ps1
-   .\.venv\Scripts\pip install -r requirements.txt
+   .\.venv\Scripts\Activate.ps1
 
 2. Run:
    .\.venv\Scripts\python.exe src\bot.py
